@@ -1,7 +1,6 @@
 package log
 
 import (
-	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -16,7 +15,7 @@ var topics map[string]struct{} = make(map[string]struct{})
 
 func Println(topic string, v ...interface{}) bool {
 	if IsOn(topic) {
-		fmt.Println(v)
+		log.Println(v...)
 		return true
 	}
 	return false
