@@ -1,6 +1,7 @@
 package log
 
 import (
+	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -19,6 +20,12 @@ func Println(topic string, v ...interface{}) bool {
 		return true
 	}
 	return false
+}
+
+func Panic(v ...interface{}) bool {
+	s := fmt.Sprint(v...)
+	log.Println(s)
+	panic(s)
 }
 
 func SetOutput(w io.Writer) { log.SetOutput(w) }
