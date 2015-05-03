@@ -30,14 +30,24 @@ func Panic(v ...interface{}) bool {
 
 func SetOutput(w io.Writer) { log.SetOutput(w) }
 
-func On(topic string) {
-	for _, t := range strings.Split(topic, " ") {
-		topics[t] = struct{}{}
+func On(topic ...string) {
+	for _, ts := range topic {
+		for _, t := range strings.Split(ts, " ") {
+			if t != "" {
+				topics[t] = struct{}{}
+			}
+		}
 	}
 }
 
-func Off(topic string) {
-	delete(topics, topic)
+func Off(topic ...string) {
+	for _, ts := range topic {
+		for _, t := range strings.Split(ts, " ") {
+			if t != "" {
+				delete(topics, t)
+			}
+		}
+	}
 }
 
 func IsOn(topic string) bool {
